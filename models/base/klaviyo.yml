@@ -1,0 +1,53 @@
+version: 2
+
+sources:
+  - name: klaviyo_raw
+    schema: klaviyo_raw
+    tables:
+      - name: event
+      - name: campaign
+      - name: flow
+      - name: person
+
+  - name: shopify
+    schema: shopify_base
+    tables:
+      - name: shopify_orders
+
+models:
+  - name: klaviyo_campaigns
+    columns: 
+      - name: unique_key
+        tests: 
+          - unique
+          - not_null
+  - name: klaviyo_flows
+    columns: 
+      - name: unique_key
+        tests: 
+          - unique
+          - not_null
+  - name: klaviyo_orders
+    columns: 
+      - name: unique_key
+        tests: 
+          - unique
+          - not_null
+  - name: klaviyo_actions
+    columns: 
+      - name: unique_key
+        tests: 
+          - unique
+          - not_null
+  - name: klaviyo_performance_by_campaign
+    columns: 
+      - name: unique_key
+        tests: 
+          - unique
+          - not_null
+  - name: klaviyo_performance_by_flow
+    columns: 
+      - name: unique_key
+        tests: 
+          - unique
+          - not_null
