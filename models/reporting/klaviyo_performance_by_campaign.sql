@@ -36,7 +36,7 @@ WITH
     WHERE flow_name = ''
     GROUP BY 
         date_granularity,
-        campaign_date,
+        date,
         campaign_id,
         campaign_name,
         campaign_subject,
