@@ -4,6 +4,12 @@ sources:
   - name: klaviyo_raw
     schema: klaviyo_raw
     tables:
+      - name: klav_placed_orders
+      - name: klav_campaigns
+
+  - name: supermetrics_raw
+    schema: supermetrics_raw
+    tables:
       - name: event
       - name: campaign
       - name: flow
