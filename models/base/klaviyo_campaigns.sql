@@ -1,25 +1,25 @@
-{%- set selected_fields = [
-    "id",
-    "subject",
-    "name",
-    "status",
-    "sent_at",
-    "campaign_type"
-] -%}
-
-{%- set schema_name, table_name = 'klaviyo_raw', 'campaign' -%}
+{%- set schema_name, table_name = 'supermetrics_raw', 'klav_campaigns' -%}
 
 WITH 
-    emails AS 
+    campaigns_data AS 
     (SELECT 
-        'Campaign' as email_type,
-        {% for column in selected_fields -%}
-        {{ get_klaviyo_clean_field(table_name, column)}}
-        {%- if not loop.last %},{% endif %}
-        {% endfor %}
+        date, 
+        campaign_send_datetime::date as campaign_date,
+        campaign_id, 
+        campaign_name, 
+        campaign_subject, 
+        flow_id, 
+        flow_name,
+        sum(coalesce(klaviyo_total_recipients,0)) as total_recipients, 
+        sum(coalesce(klaviyo_received_email,0)) as received, 
+        sum(coalesce(klaviyo_opened_email_unique,0)) as opens, 
+        sum(coalesce(klaviyo_clicked_email_unique,0)) as clicks,
+        sum(coalesce(klaviyo_bounced_email,0)) as bounced,
+        sum(coalesce(klaviyo_unsubscribed,0)) as unsubscribed,
+        sum(coalesce(klaviyo_subscribed_to_list,0)) as subscribed
 
     FROM {{ source(schema_name, table_name) }})
 
 SELECT *,
-    campaign_id as unique_key
-FROM emails
+    campaign_id||date as unique_key
+FROM campaigns_data
