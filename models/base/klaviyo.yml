@@ -7,14 +7,6 @@ sources:
       - name: klav_placed_orders
       - name: klav_campaigns
 
-  - name: klaviyo_raw
-    schema: klaviyo_raw
-    tables:
-      - name: event
-      - name: campaign
-      - name: flow
-      - name: person
-
   - name: shopify
     schema: shopify_base
     tables:
@@ -27,19 +19,7 @@ models:
         tests: 
           - unique
           - not_null
-  - name: klaviyo_flows
-    columns: 
-      - name: unique_key
-        tests: 
-          - unique
-          - not_null
-  - name: klaviyo_orders
-    columns: 
-      - name: unique_key
-        tests: 
-          - unique
-          - not_null
-  - name: klaviyo_actions
+  - name: klaviyo_placed_order
     columns: 
       - name: unique_key
         tests: 
