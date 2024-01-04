@@ -7,7 +7,7 @@ sources:
       - name: klav_placed_orders
       - name: klav_campaigns
 
-  - name: shopify
+  - name: shopify_base
     schema: shopify_base
     tables:
       - name: shopify_orders
