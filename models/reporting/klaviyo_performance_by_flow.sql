@@ -24,7 +24,7 @@ WITH
         sum(coalesce(subscribed,0)) as subscribed,
         sum(coalesce(total_orders,0)) as total_orders,
         sum(coalesce(total_revenue,0)) as total_revenue
-        {%- if shopify_table_exists %}
+        {%- if sho_table_exists %}
         , sum(coalesce(first_orders,0)) as first_orders
         , sum(coalesce(repeat_orders,0)) as repeat_orders
         , sum(coalesce(first_orders_revenue,0)) as first_orders_revenue
