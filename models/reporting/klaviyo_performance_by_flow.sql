@@ -3,7 +3,7 @@
 )}}
 
 {%- set sho_schema_name, sho_table_name = 'shopify_base', 'shopify_orders' -%}
-{%- set sho_table_exists = check_source_exists(shopify_schema_name, shopify_table_name) %}
+{%- set sho_table_exists = check_source_exists(sho_schema_name, sho_table_name) %}
 {%- set date_granularity_list = ['day','week','month','quarter','year'] -%}
 
 WITH 
