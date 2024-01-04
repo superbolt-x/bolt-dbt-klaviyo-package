@@ -1,8 +1,9 @@
 {{ config (
     alias = target.database + '_klaviyo_performance_by_campaign'
 )}}
-
-{%- set sho_table_exists = check_source_exists(shopify_schema_name, shopify_table_name) %}
+    
+{%- set sho_schema_name, sho_table_name = 'shopify_base', 'shopify_orders' -%}
+{%- set sho_table_exists = check_source_exists(sho_schema_name, sho_table_name) %}
 {%- set date_granularity_list = ['day','week','month','quarter','year'] -%}
 
 WITH 
@@ -25,7 +26,7 @@ WITH
         sum(coalesce(subscribed,0)) as subscribed,
         sum(coalesce(total_orders,0)) as total_orders,
         sum(coalesce(total_revenue,0)) as total_revenue
-        {%- if shopify_table_exists %}
+        {%- if sho_table_exists %}
         , sum(coalesce(first_orders,0)) as first_orders
         , sum(coalesce(repeat_orders,0)) as repeat_orders
         , sum(coalesce(first_orders_revenue,0)) as first_orders_revenue
