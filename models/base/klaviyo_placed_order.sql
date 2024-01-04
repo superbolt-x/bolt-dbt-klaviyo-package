@@ -1,4 +1,4 @@
-{%- set klav_schema_name, klav_schema_name = 'supermetrics_raw', 'klav_placed_orders' -%}
+{%- set klav_schema_name, klav_table_name = 'supermetrics_raw', 'klav_placed_orders' -%}
 
 {%- set sho_schema_name, sho_table_name = 'shopify_base', 'shopify_orders' -%}
 {%- set sho_table_exists = check_source_exists(sho_schema_name, sho_table_name) %}
@@ -10,7 +10,7 @@ WITH klaviyo_data AS (
     purchase_id::varchar AS order_id,
     sum(coalesce(shopify_placed_order,0)) as klav_orders,
     sum(coalesce(shopify_placed_order_value,0)) as klav_revenue
-  FROM {{ source(klav_schema_name,klav_schema_name) }}
+  FROM {{ source(klav_schema_name,klav_table_name) }}
   WHERE purchase_id != ''
   AND campaign_id != ''
   AND shopify_placed_order > 0
@@ -26,7 +26,7 @@ WITH klaviyo_data AS (
   CASE WHEN customer_order_index > 1 THEN 1 ELSE 0 END AS repeat_orders,
   CASE WHEN customer_order_index = 1 THEN total_revenue ELSE 0 END AS first_revenue,
   CASE WHEN customer_order_index > 1 THEN total_revenue ELSE 0 END AS repeat_revenue
-  FROM {{ source(shopify_base,shopify_orders) }}
+  FROM {{ source(sho_schema_name,sho_table_name) }}
 )
 
 , placed_order_data AS (
