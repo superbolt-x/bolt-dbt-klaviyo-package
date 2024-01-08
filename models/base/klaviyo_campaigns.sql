@@ -18,7 +18,8 @@ WITH
         sum(coalesce(klaviyo_unsubscribed,0)) as unsubscribed,
         sum(coalesce(klaviyo_subscribed_to_list,0)) as subscribed
 
-    FROM {{ source(schema_name, table_name) }})
+    FROM {{ source(schema_name, table_name) }}
+    GROUP BY 1,2,3,4,5,6,7)
 
 SELECT *,
     campaign_id||date as unique_key
