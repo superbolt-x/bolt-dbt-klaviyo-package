@@ -42,7 +42,7 @@ WITH
     {% endif %}
     {%- endfor %}
 
-    ({% for date_granularity in date_granularity_list -%}
+    {% for date_granularity in date_granularity_list -%}
     SELECT *
     FROM performance_{{date_granularity}}
     {% if not loop.last %}UNION ALL
