@@ -14,7 +14,6 @@ WITH
         date_trunc('{{date_granularity}}',date) as date,
         '{{date_granularity}}' as date_granularity,
         flow_name,
-        date::varchar||date_granularity||flow_name as unique_key,
         sum(coalesce(total_recipients,0)) as total_recipients,
         sum(coalesce(received,0)) as received,
         sum(coalesce(opens,0)) as opens,
@@ -36,8 +35,7 @@ WITH
     GROUP BY 
         date_granularity,
         date,
-        flow_name,
-        unique_key
+        flow_name
     ){% if not loop.last %},
     {% endif %}
     {%- endfor %}
