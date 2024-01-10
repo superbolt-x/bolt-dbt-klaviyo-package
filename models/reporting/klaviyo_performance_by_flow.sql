@@ -36,7 +36,7 @@ WITH
     GROUP BY 
         date_granularity,
         date,
-        flow_name
+        flow_name,
         unique_key
     ){% if not loop.last %},
     {% endif %}
