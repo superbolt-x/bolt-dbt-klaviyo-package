@@ -21,7 +21,7 @@ WITH klaviyo_data AS (
 {%- if sho_table_exists %}
 , shopify_data AS (
   SELECT order_id::varchar, 
-  datediff(day,customer_first_order_date,date) AS delay,
+  datediff(day,customer_first_order_date,order_date) AS delay,
   CASE WHEN customer_order_index = 1 THEN 1 ELSE 0 END AS first_orders,
   CASE WHEN customer_order_index > 1 THEN 1 ELSE 0 END AS repeat_orders,
   CASE WHEN customer_order_index = 1 THEN total_revenue ELSE 0 END AS first_revenue,
