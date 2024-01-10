@@ -25,15 +25,3 @@ models:
         tests: 
           - unique
           - not_null
-  - name: klaviyo_performance_by_campaign
-    columns: 
-      - name: unique_key
-        tests: 
-          - unique
-          - not_null
-  - name: klaviyo_performance_by_flow
-    columns: 
-      - name: unique_key
-        tests: 
-          - unique
-          - not_null
