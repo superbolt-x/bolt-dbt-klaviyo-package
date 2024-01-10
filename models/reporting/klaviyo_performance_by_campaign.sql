@@ -16,7 +16,6 @@ WITH
         campaign_id,
         campaign_name,
         campaign_subject,
-        date::varchar||date_granularity||campaign_id as unique_key,
         sum(coalesce(total_recipients,0)) as total_recipients,
         sum(coalesce(received,0)) as received,
         sum(coalesce(opens,0)) as opens,
@@ -40,8 +39,7 @@ WITH
         date,
         campaign_id,
         campaign_name,
-        campaign_subject,
-        unique_key
+        campaign_subject
     ){% if not loop.last %},
     {% endif %}
     {%- endfor %}
